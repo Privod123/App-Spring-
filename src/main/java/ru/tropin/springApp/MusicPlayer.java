@@ -20,6 +20,14 @@ public class MusicPlayer {
         this.musicList = musicList;
     }
 
+    public void doMyInit(){
+        System.out.println("start init method class MusicPlayer");
+    }
+
+    public void doMyDestroy(){
+        System.out.println("start destroy method class MusicPlayer");
+    }
+
     public String getName() {
         return name;
     }
@@ -40,7 +48,7 @@ public class MusicPlayer {
         this.music = music;
     }
 
-    public void playerMusic() {
+    public void playMusic() {
         System.out.println("Playing : " + music.getSong());
     }
 

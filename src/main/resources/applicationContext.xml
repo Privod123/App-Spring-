@@ -18,7 +18,10 @@
                             scope="global-session" (используется в SpringMVC)
                             -->
     <bean id="musicClassicBean"
-          class="ru.tropin.springApp.ClassicMusic">
+            class="ru.tropin.springApp.ClassicMusic"
+            init-method="doMyInit"
+            destroy-method="doMyDestroy"
+            factory-method="getClassicMusic">
     </bean>
 
     <bean id="musicRockBean"
@@ -30,8 +33,10 @@
     </bean>
 
     <bean id="musicPlayer"
-          class="ru.tropin.springApp.MusicPlayer"
-          scope="prototype">
+            class="ru.tropin.springApp.MusicPlayer"
+            scope="prototype"
+            init-method="doMyInit"
+            destroy-method="doMyDestroy">
 
         <property name="music" ref="musicClassicBean"/>
 
