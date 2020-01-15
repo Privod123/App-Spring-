@@ -7,16 +7,23 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- Строска ниже нужна для загрузки внешнего файла.
-         В нашем случае там лежат настройки музыкального плейра -->
-    <context:property-placeholder location="classpath:musicPlayer.properties"/>
+    <!-- Строска ниже нужна для включения поиска загрузки и создания бинов через аннотацию Component.
+            Указваем где смотреть фалы для Spring-->
+                <context:component-scan base-package="ru.tropin.springApp"/>
 
-    <!-- При создании даннного Bean используется scope="singleton"(стоит по умолчанию)
-         Можно использовать scope="prototype"(он позволяет при каждом вызове bean создавать свой обьект)
+
+    <!-- Ниже представлен пример создания бинов и загрузки их через настройки xml файла.
+         Обычно это считается в ручную делать загрузку
+
+    Строска ниже нужна для загрузки внешнего файла. В нашем случае там лежат настройки музыкального плейра
+            <context:property-placeholder location="classpath:musicPlayer.properties"/>
+
+        При создании даннного Bean используется scope="singleton"(стоит по умолчанию)
+        Можно использовать scope="prototype"(он позволяет при каждом вызове bean создавать свой обьект)
                             scope="request" (используется в SpringMVC)
                             scope="session" (используется в SpringMVC)
                             scope="global-session" (используется в SpringMVC)
-                            -->
+
     <bean id="musicClassicBean"
             class="ru.tropin.springApp.ClassicMusic"
             init-method="doMyInit"
@@ -40,8 +47,8 @@
 
         <property name="music" ref="musicClassicBean"/>
 
-        <!--Ниже приведен пример как внедрить коллекцию List в Bean-->
-        <!--
+        Ниже приведен пример как внедрить коллекцию List в Bean
+
         <property name="musicList">
             <list>
                 <ref bean="musicClassicBean"/>
@@ -49,10 +56,10 @@
                 <ref bean="musicJazzBean"/>
             </list>
         </property>
-        -->
+
 
         <property name="name" value="${musicPlayer.name}"/>
         <property name="volume" value="${musicPlayer.volume}"/>
     </bean>
-
+    -->
 </beans>
