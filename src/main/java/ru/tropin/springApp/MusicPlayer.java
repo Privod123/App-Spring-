@@ -1,24 +1,34 @@
 package ru.tropin.springApp;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+import static ru.tropin.springApp.TypeMusic.CLASSICAL;
+import static ru.tropin.springApp.TypeMusic.ROCK;
+
+@Component
 public class MusicPlayer {
-    private List<Music> musicList = new ArrayList<>();
-    private Music music;
+//    @Autowired                         // данная аннтотация говорит в этом месте сделать иньекцию бина
+//    @Qualifier("classicMusic")         // данная аннотация говорит какой именно бин надо вставить
+    private Music music1;
+    private Music music2;
 
     private String name;
     private int volume;
 
-    public MusicPlayer() {}
-
-    public MusicPlayer(Music music) {
-        this.music = music;
+    @Autowired
+    public MusicPlayer(@Qualifier ("classicMusic") Music music1,
+                       @Qualifier("rockMusic") Music music2) {
+        this.music1 = music1;
+        this.music2 = music2;
     }
 
-    public void setMusicList(List<Music> musicList) {
-        this.musicList = musicList;
-    }
+
 
     public void doMyInit(){
         System.out.println("start init method class MusicPlayer");
@@ -44,17 +54,20 @@ public class MusicPlayer {
         this.volume = volume;
     }
 
-    public void setMusic(Music music) {
-        this.music = music;
-    }
 
-    public void playMusic() {
-        System.out.println("Playing : " + music.getSong());
-    }
-
-    public void playMusicList(){
-        for (Music music1 : musicList) {
-            System.out.println("Playing : " + music1.getSong());
+    public void playMusic(Enum typeMusic) {
+        Random random = new Random();
+        if (typeMusic == CLASSICAL) {
+            int numberMusic = random.nextInt(music1.getSong().size());
+            System.out.println(music1.getSong().get(numberMusic));
+        } else if (typeMusic == ROCK) {
+            int numberMusic = random.nextInt(music2.getSong().size());
+            System.out.println(music2.getSong().get(numberMusic));
+        } else {
+            System.out.println("не известный тип музыки");
         }
+
+
     }
+
 }
