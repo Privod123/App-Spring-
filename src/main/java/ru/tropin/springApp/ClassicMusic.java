@@ -1,11 +1,15 @@
 package ru.tropin.springApp;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Scope("singleton")
 public class ClassicMusic implements Music {
 
     private List<String> listClassicMusic = new ArrayList<>();
@@ -21,10 +25,12 @@ public class ClassicMusic implements Music {
         return listClassicMusic;
     }
 
+    @PostConstruct
     public void doMyInit(){
         System.out.println("start init method class ClassicMusic");
     }
 
+    @PreDestroy
     public void doMyDestroy(){
         System.out.println("start destroy method class ClassicMusic");
     }

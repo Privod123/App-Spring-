@@ -28,8 +28,6 @@ public class MusicPlayer {
         this.music2 = music2;
     }
 
-
-
     public void doMyInit(){
         System.out.println("start init method class MusicPlayer");
     }
